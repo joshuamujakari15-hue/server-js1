@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Portfolio — JoshWebs</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="container nav-container">
+    <a href="index.html" class="brand">
+      <img src="assets/logo.png" alt="JoshWebs Logo" width="100" />
+      JoshWebs
+    </a>
+    <nav>
+      <ul class="nav-links">
+        <li><a href="about.html">About</a></li>
+        <li><a href="services.html">Services</a></li>
+        <li><a href="portfolio.html" class="cta">Portfolio</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main class="container">
+  <section class="hero glass" style="padding: 60px 20px; text-align: center;">
+    <h1>Our Portfolio</h1>
+    <p style="max-width: 700px; margin: 20px auto; font-size: 1.1rem; line-height: 1.6;">
+      We design modern, branded websites that are responsive, accessible, and visually engaging. 
+      Here are some of our recent projects demonstrating our approach to UI/UX and functionality.
+    </p>
+  </section>
+
+  <section class="grid-3" style="margin-top: 40px; gap: 24px;">
+    <article class="glass" style="padding: 20px; border-radius: 16px;">
+      <img src="assets/portfolio-1.jpg" alt="Student Housing Platform" style="width:100%; border-radius: 12px;">
+      <h3 style="margin-top: 16px;">Student Housing Platform</h3>
+      <p>Responsive listing pages with overlays, filters, and clear contact paths for students and landlords.</p>
+    </article>
+
+    <article class="glass" style="padding: 20px; border-radius: 16px;">
+      <img src="assets/portfolio-2.jpg" alt="Local Services Directory" style="width:100%; border-radius: 12px;">
+      <h3 style="margin-top: 16px;">Local Services Directory</h3>
+      <p>Branded directory for local businesses with feedback popups and accessible navigation.</p>
+    </article>
+
+    <article class="glass" style="padding: 20px; border-radius: 16px;">
+      <img src="assets/portfolio-3.jpg" alt="Branded Business Site" style="width:100%; border-radius: 12px;">
+      <h3 style="margin-top: 16px;">Branded Business Site</h3>
+      <p>Clean identity system with animated gradients, parallax hero, and consistent visual language.</p>
+    </article>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="container footer-grid">
+    <div>JoshWebs</div>
+    <div></div>
+    <div>© <span id="year"></span> JoshWebs</div>
+  </div>
+</footer>
+
+<script src="chatbot.js" type="module"></script>
+<script src="scripts.js" type="module"></script>
+</body>
+</html>
