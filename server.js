@@ -10,7 +10,7 @@ app.use(express.json());
 
 const DATA_FILE = "trainingData.json";
 const ADMIN_KEY = "supersecret123";
-const ADMIN_EMAIL = "joshuamujakari15@gmail.com";
+const ADMIN_EMAIL = process.env.ADMIN_EMAIL || "joshuamujakari15@gmail.com";
 
 // Load training data
 let trainingData = [];
@@ -35,20 +35,20 @@ function saveTrainingData() {
   fuse = new Fuse(trainingData, fuseOptions);
 }
 
-// Gmail transporter
+// Gmail transporter (using environment variables)
 const transporter = nodemailer.createTransport({
   service: "gmail",
   auth: {
-    user: "joshuamujakari15@gmail.com",
-    pass: "aikdlpbxvklvavck" // App Password
+    user: process.env.GMAIL_USER,
+    pass: process.env.GMAIL_PASS
   },
   tls: {
     rejectUnauthorized: false
   }
 });
 
+// Chatbot + contact form route
 app.post("/api/chat", async (req, res) => {
-
   /* ===============================
      ✅ AUTOMATIC CONTACT HANDLER
      =============================== */
@@ -57,9 +57,8 @@ app.post("/api/chat", async (req, res) => {
     const email = req.body.email || "Not provided";
     const message = req.body.message || "";
 
-    // Email to admin
     const mailOptions = {
-      from: `"JoshWebs Contact" <joshuamujakari15@gmail.com>`,
+      from: `"JoshWebs Contact" <${process.env.GMAIL_USER}>`,
       to: ADMIN_EMAIL,
       subject: "New Contact Message from Website",
       text: `
@@ -77,10 +76,10 @@ ${message}
       await transporter.sendMail(mailOptions);
       console.log("✅ Contact email sent to admin");
 
-      // ✅ Auto-reply to customer
+      // Auto-reply to customer
       if (email !== "Not provided") {
         const autoReply = {
-          from: `"JoshWebs" <joshuamujakari15@gmail.com>`,
+          from: `"JoshWebs" <${process.env.GMAIL_USER}>`,
           to: email,
           subject: "We received your message – JoshWebs",
           text: `
@@ -116,9 +115,8 @@ https://joshwebs.com
   }
 
   /* ===============================
-     🤖 CHATBOT LOGIC (UNCHANGED)
+     🤖 CHATBOT LOGIC
      =============================== */
-
   const msg = (req.body.message || "").toLowerCase().trim();
   const teach = req.body.teach?.trim();
   const key = req.body.key;
@@ -154,7 +152,13 @@ https://joshwebs.com
   res.json({ reply });
 });
 
-const PORT = 8080;
+// Health check
+app.get("/", (req, res) => {
+  res.send("Backend is live and running");
+});
+
+// Listen on Render-assigned port
+const PORT = process.env.PORT || 8080;
 app.listen(PORT, () =>
-  console.log("✅ JoshWebs chatbot server running on port 8080")
+  console.log(`✅ JoshWebs chatbot server running on port ${PORT}`)
 );
