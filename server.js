@@ -13,9 +13,6 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-// Serve frontend static files from 'public' folder
-app.use(express.static(path.join(__dirname, "public")));
-
 const DATA_FILE = "trainingData.json";
 const ADMIN_KEY = "supersecret123";
 const ADMIN_EMAIL = process.env.ADMIN_EMAIL || "joshuamujakari15@gmail.com";
@@ -153,14 +150,12 @@ https://joshwebs.com
   }
 });
 
-// Health check
-app.get("/api/health", (req, res) => {
-  res.json({ status: "Backend is live and running" });
-});
+// Serve frontend files
+app.use(express.static(path.join(__dirname, "../public")));
 
-// For any other route, serve frontend's index.html (SPA support)
+// Serve index.html for all unknown routes (SPA fallback)
 app.get("*", (req, res) => {
-  res.sendFile(path.join(__dirname, "public", "index.html"));
+  res.sendFile(path.join(__dirname, "../public", "index.html"));
 });
 
 // Listen on Render-assigned port
