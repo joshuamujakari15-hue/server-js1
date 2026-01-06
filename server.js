@@ -3,10 +3,18 @@ import cors from "cors";
 import fs from "fs";
 import Fuse from "fuse.js";
 import nodemailer from "nodemailer";
+import path from "path";
+import { fileURLToPath } from "url";
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 const app = express();
 app.use(cors());
 app.use(express.json());
+
+// Serve frontend static files from 'public' folder
+app.use(express.static(path.join(__dirname, "public")));
 
 const DATA_FILE = "trainingData.json";
 const ADMIN_KEY = "supersecret123";
@@ -146,12 +154,17 @@ https://joshwebs.com
 });
 
 // Health check
-app.get("/", (req, res) => {
-  res.send("Backend is live and running");
+app.get("/api/health", (req, res) => {
+  res.json({ status: "Backend is live and running" });
+});
+
+// For any other route, serve frontend's index.html (SPA support)
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "public", "index.html"));
 });
 
 // Listen on Render-assigned port
 const PORT = process.env.PORT || 8080;
 app.listen(PORT, () =>
-  console.log(`✅ JoshWebs chatbot server running on port ${PORT}`)
+  console.log(`✅ JoshWebs full-stack server running on port ${PORT}`)
 );
