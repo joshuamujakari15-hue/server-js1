@@ -1,23 +1,22 @@
 import express from "express";
 import cors from "cors";
 import fs from "fs";
+import path from "path";
 import Fuse from "fuse.js";
 import nodemailer from "nodemailer";
-import path from "path";
-import { fileURLToPath } from "url";
-
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
 
 const app = express();
 app.use(cors());
 app.use(express.json());
 
-const DATA_FILE = "trainingData.json";
+// ===== Paths =====
+const PUBLIC_DIR = path.join(process.cwd(), "public"); // Correct path to your frontend
+const DATA_FILE = path.join(process.cwd(), "trainingData.json");
+
 const ADMIN_KEY = "supersecret123";
 const ADMIN_EMAIL = process.env.ADMIN_EMAIL || "joshuamujakari15@gmail.com";
 
-// Load training data
+// ===== Load training data =====
 let trainingData = [];
 try {
   const data = fs.readFileSync(DATA_FILE, "utf-8");
@@ -26,7 +25,7 @@ try {
   console.error("Error loading training data:", err);
 }
 
-// Configure Fuse.js
+// ===== Fuse.js setup =====
 const fuseOptions = {
   includeScore: true,
   threshold: 0.4,
@@ -34,25 +33,23 @@ const fuseOptions = {
 };
 let fuse = new Fuse(trainingData, fuseOptions);
 
-// Save training data
+// ===== Save training data =====
 function saveTrainingData() {
   fs.writeFileSync(DATA_FILE, JSON.stringify(trainingData, null, 2), "utf-8");
   fuse = new Fuse(trainingData, fuseOptions);
 }
 
-// Gmail transporter (uses environment variables)
+// ===== Nodemailer setup =====
 const transporter = nodemailer.createTransport({
   service: "gmail",
   auth: {
     user: process.env.GMAIL_USER,
     pass: process.env.GMAIL_PASS
   },
-  tls: {
-    rejectUnauthorized: false
-  }
+  tls: { rejectUnauthorized: false }
 });
 
-// Chatbot + contact form route
+// ===== Chatbot + Contact Form Route =====
 app.post("/api/chat", async (req, res) => {
   if (req.body.action === "contact") {
     const name = req.body.name || "Unknown";
@@ -110,9 +107,7 @@ https://joshwebs.com
 
     } catch (error) {
       console.error("❌ Email error:", error);
-      return res.json({
-        reply: "❌ Failed to send message. Please try again later."
-      });
+      return res.json({ reply: "❌ Failed to send message. Please try again later." });
     }
   } else {
     // Chatbot logic
@@ -123,21 +118,17 @@ https://joshwebs.com
     let reply = "Thanks for contacting JoshWebs! Could you tell me more about your project?";
 
     const result = fuse.search(msg);
-
     if (result.length > 0 && result[0].score < 0.4) {
       reply = result[0].item.reply;
     } else if (teach) {
       if (key === ADMIN_KEY) {
         const existing = trainingData.find(item => item.reply === teach);
         if (existing) {
-          if (!existing.patterns.includes(msg)) {
-            existing.patterns.push(msg);
-            saveTrainingData();
-          }
+          if (!existing.patterns.includes(msg)) existing.patterns.push(msg);
         } else {
           trainingData.push({ patterns: [msg], reply: teach });
-          saveTrainingData();
         }
+        saveTrainingData();
         reply = "Got it! I’ve learned something new. Thanks!";
       } else {
         reply = "❌ You are not authorized to teach me.";
@@ -150,15 +141,20 @@ https://joshwebs.com
   }
 });
 
-// Serve frontend files
-app.use(express.static(path.join(__dirname, "../public")));
+// ===== Serve Frontend =====
+app.use(express.static(PUBLIC_DIR));
 
-// Serve index.html for all unknown routes (SPA fallback)
+// SPA fallback for frontend routes
 app.get("*", (req, res) => {
-  res.sendFile(path.join(__dirname, "../public", "index.html"));
+  res.sendFile(path.join(PUBLIC_DIR, "index.html"));
 });
 
-// Listen on Render-assigned port
+// ===== Health Check =====
+app.get("/health", (req, res) => {
+  res.send("Backend is live and running");
+});
+
+// ===== Listen on Render-assigned port =====
 const PORT = process.env.PORT || 8080;
 app.listen(PORT, () =>
   console.log(`✅ JoshWebs full-stack server running on port ${PORT}`)
