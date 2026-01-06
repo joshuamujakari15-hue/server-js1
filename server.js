@@ -10,7 +10,8 @@ app.use(cors());
 app.use(express.json());
 
 // ===== Paths =====
-const PUBLIC_DIR = path.join(process.cwd(), "public"); // Correct path to your frontend
+const PUBLIC_DIR = path.join(process.cwd(), "..", "public");
+
 const DATA_FILE = path.join(process.cwd(), "trainingData.json");
 
 const ADMIN_KEY = "supersecret123";
