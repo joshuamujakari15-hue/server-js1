@@ -1,1 +1,10 @@
-[]
+[
+  {
+    "patterns": ["hello", "hi", "hey"],
+    "reply": "Hello! How can I help you today?"
+  },
+  {
+    "patterns": ["services", "what services", "pricing"],
+    "reply": "We offer web development, design, and consulting services."
+  }
+]
