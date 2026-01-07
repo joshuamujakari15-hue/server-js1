@@ -1,10 +1,82 @@
 [
   {
-    "patterns": ["hello", "hi", "hey"],
-    "reply": "Hello! How can I help you today?"
+    "patterns": ["hi", "hello", "hey", "good morning", "good afternoon"],
+    "reply": "Hello! Welcome to JoshWebs. How can I help you today?"
   },
   {
-    "patterns": ["services", "what services", "pricing"],
-    "reply": "We offer web development, design, and consulting services."
+    "patterns": ["how are you", "how are you doing", "how's it going"],
+    "reply": "I'm doing great, thanks for asking! How can I assist you with your web project today?"
+  },
+  {
+    "patterns": ["what services do you offer", "services", "what can you do", "web development services"],
+    "reply": "We offer modern website development, e-commerce stores, responsive designs, SEO optimization, and web consulting. You can check our Services page for more details."
+  },
+  {
+    "patterns": ["pricing", "how much does a website cost", "website price", "cost of web development"],
+    "reply": "Pricing depends on your project requirements. Please contact us via the form or chat on WhatsApp for a personalized quote."
+  },
+  {
+    "patterns": ["portfolio", "your work", "projects", "examples of your work", "show me your work"],
+    "reply": "You can see some of our recent projects on the Portfolio page. We specialize in clean, modern, and responsive websites."
+  },
+  {
+    "patterns": ["contact", "how can I reach you", "email", "phone", "get in touch"],
+    "reply": "You can reach us using the Contact form or chat with us on WhatsApp. We're always happy to help!"
+  },
+  {
+    "patterns": ["do you do SEO", "search engine optimization", "seo services", "ranking websites"],
+    "reply": "Yes! We provide SEO services to help your website rank higher on Google and attract more visitors."
+  },
+  {
+    "patterns": ["support", "help", "assistance", "technical support"],
+    "reply": "If you need support, you can fill out the Contact form or send a message via the chat. We'll respond as soon as possible."
+  },
+  {
+    "patterns": ["thank you", "thanks", "thx", "thank you very much"],
+    "reply": "You're welcome! Let us know if you have any other questions."
+  },
+  {
+    "patterns": ["what platforms do you use", "technologies", "tech stack", "tools"],
+    "reply": "We primarily use modern web technologies like HTML, CSS, JavaScript, Node.js, Express, and React. We adapt the stack depending on your project needs."
+  },
+  {
+    "patterns": ["can you redesign my website", "website redesign", "improve my site"],
+    "reply": "Absolutely! We can redesign your website to be modern, responsive, and optimized for performance and SEO."
+  },
+  {
+    "patterns": ["how long does it take", "project timeline", "delivery time"],
+    "reply": "Timeline depends on the project scope. Simple websites may take 1–2 weeks, while more complex projects could take a few months. Contact us for a detailed estimate."
+  },
+  {
+    "patterns": ["do you offer maintenance", "website maintenance", "support after launch"],
+    "reply": "Yes! We offer ongoing maintenance and support to ensure your website stays up-to-date and secure."
+  },
+  {
+    "patterns": ["can you make ecommerce site", "online store", "sell products online"],
+    "reply": "Yes, we can build fully functional e-commerce websites with payment integration and product management."
+  },
+  {
+    "patterns": ["are your websites mobile friendly", "responsive design", "mobile optimization"],
+    "reply": "Absolutely! All websites we build are fully responsive and optimized for mobile devices."
+  },
+  {
+    "patterns": ["do you offer custom solutions", "custom web development", "special features"],
+    "reply": "Yes! We provide custom web development solutions tailored to your business needs."
+  },
+  {
+    "patterns": ["fun", "joke", "tell me something fun", "make me laugh"],
+    "reply": "Why did the developer go broke? Because he used up all his cache!"
+  },
+  {
+    "patterns": ["bye", "goodbye", "see you later", "talk to you later"],
+    "reply": "Goodbye! Feel free to reach out anytime. Have a great day!"
+  },
+  {
+    "patterns": ["who are you", "about you", "who made you"],
+    "reply": "I'm JoshWebs Assistant, here to help answer your questions and guide you through our services!"
+  },
+  {
+    "patterns": ["i need a website", "can you build my website", "hire you for web development"],
+    "reply": "We’d love to help! Please use the Contact form or chat with us on WhatsApp so we can discuss your project."
   }
 ]
