@@ -32,58 +32,45 @@
   </section>
 
   <section class="glass" style="padding: 40px; margin-top: 40px; border-radius: 16px;">
-    <!-- ✅ UPDATED FORM ID -->
+    <!-- Contact Form -->
     <form id="contactForm">
 
       <div style="margin-bottom: 20px;">
-        <label style="display: block; font-weight: 600; margin-bottom: 6px;">Name</label>
-        <!-- ✅ ID ADDED -->
+        <label for="name" style="display: block; font-weight: 600; margin-bottom: 6px;">Name</label>
         <input id="name" type="text" required
           style="width: 100%; padding: 12px; border-radius: 12px; border: 1px solid var(--border);">
       </div>
 
       <div style="margin-bottom: 20px;">
-        <label style="display: block; font-weight: 600; margin-bottom: 6px;">Email</label>
-        <!-- ✅ ID ADDED -->
+        <label for="email" style="display: block; font-weight: 600; margin-bottom: 6px;">Email</label>
         <input id="email" type="email" required
           style="width: 100%; padding: 12px; border-radius: 12px; border: 1px solid var(--border);">
       </div>
 
       <div style="margin-bottom: 20px;">
-        <label style="display: block; font-weight: 600; margin-bottom: 6px;">Message</label>
-        <!-- ✅ ID ADDED -->
+        <label for="message" style="display: block; font-weight: 600; margin-bottom: 6px;">Message</label>
         <textarea id="message" required rows="6"
           style="width: 100%; padding: 12px; border-radius: 12px; border: 1px solid var(--border);"></textarea>
       </div>
 
       <button type="submit" class="btn primary">Send</button>
 
-      <!-- ✅ STATUS MESSAGE -->
+      <!-- Status message -->
       <p id="status" class="form-status" role="status" aria-live="polite"
          style="margin-top: 12px; color: var(--secondary); font-weight: 500;"></p>
 
-         <div class="g-recaptcha" data-sitekey="6Lfg8EAsAAAAACmdWjPhdUVPQCfrlzUwnhqEF6j9"></div>
-<div id="spinner" style="display:none;">Sending...</div>
-
+      <!-- Optional reCAPTCHA -->
+      <div class="g-recaptcha" data-sitekey="6Lfg8EAsAAAAACmdWjPhdUVPQCfrlzUwnhqEF6j9"></div>
+      <div id="spinner" style="display:none;">Sending...</div>
 
     </form>
-    <a
-  href="https://wa.link/b21zp4=Hello%20JoshWebs%2C%20I%20need%20a%20website"
-  target="_blank"
-  class="btn whatsapp"
-  style="
-    display:inline-block;
-    margin-top:20px;
-    background:#25D366;
-    color:#fff;
-    padding:12px 20px;
-    border-radius:12px;
-    text-decoration:none;
-    font-weight:600;
-  "
->
-  💬 Chat with us on WhatsApp
-</a>
+
+    <a href="https://wa.link/b21zp4=Hello%20JoshWebs%2C%20I%20need%20a%20website"
+       target="_blank"
+       class="btn whatsapp"
+       style="display:inline-block; margin-top:20px; background:#25D366; color:#fff; padding:12px 20px; border-radius:12px; text-decoration:none; font-weight:600;">
+      💬 Chat with us on WhatsApp
+    </a>
 
   </section>
 </main>
@@ -98,11 +85,8 @@
 
 <!-- JS FILES -->
 <script src="chatbot.js" type="module"></script>
-<script src="scripts.js"></script>
+<script src="scripts.js" type="module"></script> <!-- Updated to module -->
 <script src="https://www.google.com/recaptcha/api.js" async defer></script>
-
-
-
 
 </body>
 </html>

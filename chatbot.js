@@ -36,33 +36,43 @@ export function createChat() {
   async function handleUserMessage() {
     const text = input.value.trim();
     if (!text) return;
+
     addMessage("user", text);
     input.value = "";
-
-    // Show temporary "Thinking..."
     addMessage("ai", "Thinking...");
 
     try {
-      const res = await fetch("https://server-js1-knwk3trwd-joshua-mujakaris-projects.vercel.app/api/chat", {
-  method: "POST",
-  headers: { "Content-Type": "application/json" },
-  body: JSON.stringify(payload)
-});
+      const payload = { message: text };
+
+      const res = await fetch(
+        "https://server-js123.onrender.com/api/chat",
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(payload)
+        }
+      );
 
       const data = await res.json();
-      body.lastChild.querySelector(".bubble").textContent = data.reply;
-    } catch (e) {
       body.lastChild.querySelector(".bubble").textContent =
-        "Service unavailable. Please contact us directly.";
+        data.reply || "I couldn’t generate a response.";
+    } catch (err) {
+      console.error(err);
+      body.lastChild.querySelector(".bubble").textContent =
+        "Service unavailable. Please try again later.";
     }
   }
 
-  launcher.addEventListener("click", () => panel.classList.toggle("open"));
-  close.addEventListener("click", () => panel.classList.remove("open"));
+  launcher.addEventListener("click", () =>
+    panel.classList.toggle("open")
+  );
+  close.addEventListener("click", () =>
+    panel.classList.remove("open")
+  );
   send.addEventListener("click", handleUserMessage);
   input.addEventListener("keydown", (e) => {
     if (e.key === "Enter") handleUserMessage();
   });
 }
 
-document.addEventListener("DOMContentLoaded", () => createChat());
+document.addEventListener("DOMContentLoaded", createChat);
